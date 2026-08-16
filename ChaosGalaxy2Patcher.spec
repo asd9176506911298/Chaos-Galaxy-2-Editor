@@ -8,13 +8,18 @@ unitypy_datas = [
     (os.path.join(unitypy_path, 'resources'), 'UnityPy/resources'),
 ]
 
+# Win7 相容轉接 DLL
+win7_dlls = [
+    ('api-ms-win-core-path-l1-1-0.dll', '.'),
+]
+
 a = Analysis(
     ['ChaosGalaxy2Patcher.py'],
     pathex=[],
-    binaries=[],
-    datas=unitypy_datas,  # <-- 1. 這裡加入了 UnityPy 的資源資料夾
+    binaries=win7_dlls,  # <-- 這裡把轉接 DLL 打包進 EXE 根目錄
+    datas=unitypy_datas,
     hiddenimports=[
-        'UnityPy.resources',  # <-- 2. 這裡強迫引入找不到的子模組
+        'UnityPy.resources',
     ],
     hookspath=[],
     hooksconfig={},
